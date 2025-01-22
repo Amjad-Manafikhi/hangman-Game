@@ -1,0 +1,63 @@
+html{
+  font-family: "inter" , serif;
+}
+h1{
+  margin: 0px;
+}
+
+body{
+  
+  background-color:rgb(20,20,20);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+h1,h4{
+  color:rgb(240,240,240);
+  margin:5px;
+}
+.keyboard-buttons{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard-buttons button{
+  width:50px;
+  height:50px;
+  margin :5px;
+  border-radius:5px; 
+  font-family: "inter" , serif;
+ 
+}
+.blanks-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:30px;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.new-game-button{
+  width:150px;
+  height:30px;
+  border-radius: 5px;
+  border:0px;
+  margin-top:20px;
+}
+.game-lost{
+  color:red;
+}
+.game-won{
+  color:green;
+}
+img{
+  margin:10px;
+}
