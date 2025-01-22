@@ -37,7 +37,7 @@ h1,h4{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin:30px;
+  margin:15px;
 }
 .container{
   display: flex;
@@ -54,13 +54,21 @@ h1,h4{
 }
 .game-lost{
   color:red;
+  margin:5px;
 }
 .game-won{
   color:green;
+  margin:5px;
+
 }
 img{
   margin:10px;
 }
 button{
   color :black;
+}
+.answer{
+  color:rgb(240,240,240);
+  width:auto;
+  margin: 5px;
 }

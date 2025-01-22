@@ -34,9 +34,9 @@ export default function App() {
     }));
     return x; // Return the transformed array
   }
-
-  const [keyboardButtons, setKeyboardButtons] = React.useState(() => generateLetters(word));
-  const [wordLetters, setWordLetters] = React.useState(() => splitLetters(word));
+  
+  const [keyboardButtons, setKeyboardButtons] = React.useState(() => generateLetters(word.word));
+  const [wordLetters, setWordLetters] = React.useState(() => splitLetters(word.word));
   const [wrongCount, setWrongCount] = React.useState(0);
   const newGameButtonRef = React.useRef(null);
 
@@ -59,10 +59,9 @@ export default function App() {
 
 
   function hold(id) {
-
     setKeyboardButtons(oldState =>
       oldState.map((button) => {
-        if (button.id === id && !button.isHeld && !word.includes(id)) { setWrongCount((prev) => prev + 1); }
+        if (button.id === id && !button.isHeld && !(word.word).includes(id)) { setWrongCount((prev) => prev + 1); }
 
         return button.id === id ? { ...button, isHeld: true } : button
       }
@@ -102,13 +101,17 @@ export default function App() {
   function handleNewGame() {
     const newWord = chooseRandom(); // Choose a new word first
     setWord(newWord); // Set the new word
-    setKeyboardButtons(() => generateLetters(newWord)); // Pass the new word to generate letters
-    setWordLetters(() => splitLetters(newWord)); // Update word letters
+    setKeyboardButtons(() => generateLetters(newWord.word)); // Pass the new word to generate letters
+    setWordLetters(() => splitLetters(newWord.word)); // Update word letters
     setWrongCount(0); // Reset the wrong count
   }
   
-  if (gameWon && newGameButtonRef !== null) { newGameButtonRef.current.focus(); }
-  const pic = pics[wrongCount];
+  React.useEffect(() =>{
+    if(newGameButtonRef!==null&&(gameLost||gameWon)){
+      newGameButtonRef.current.focus();
+    }
+  },[gameLost,gameWon]); 
+ const pic = pics[wrongCount];
 
 
 
@@ -121,6 +124,11 @@ export default function App() {
       <h4>Guess the word in under 8 attepmts to keep the man alive!</h4>
       {gameWon && <h2 className='game-won'>Thanks for saving my life</h2>}
       {gameLost && <h2 className="game-lost"> You killed meee</h2>}
+      {(gameLost || gameWon) && <div>
+                <p className='answer'>answer: {word.word}</p>
+        </div>
+         }
+         <p className='answer'>hint: {word.hint}</p>
       <img src={pic} width="100px" />
       <div className='blanks-container'>
         {blanks}
@@ -136,7 +144,7 @@ export default function App() {
           {thirdRow}
         </div>
       </div>
-      {<button className='new-game-button' onClick={handleNewGame} ref={newGameButtonRef}>New Game</button>}
+      <button className='new-game-button' onClick={handleNewGame} ref={newGameButtonRef}>New Game</button>
       {gameWon && <Confetti />}
     </div>
   )
