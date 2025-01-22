@@ -21,27 +21,27 @@ export default function App() {
   const pics = [pic0, pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8];
 
   const [word, setWord] = React.useState(() => chooseRandom());
-  function splitLetters() {
-    return word.split("").map((letter) => ({ value: letter, isHeld: false, }))
+  function splitLetters(currentWord) {
+    return currentWord.split("").map((letter) => ({ value: letter, isHeld: false, }))
   }
-  function generateLetters() {
+  function generateLetters(currentWord) {
     const s = "qwertyuiopasdfghjklzxcvbnm";
     const x = s.split("").map((letter) => ({
       value: letter,
       isHeld: false,
-      isWanted: word.includes(letter),
+      isWanted: currentWord.includes(letter),
       id: letter
     }));
     return x; // Return the transformed array
   }
 
-  const [keyboardButtons, setKeyboardButtons] = React.useState(() => generateLetters());
-  const [wordLetters, setWordLetters] = React.useState(() => splitLetters());
+  const [keyboardButtons, setKeyboardButtons] = React.useState(() => generateLetters(word));
+  const [wordLetters, setWordLetters] = React.useState(() => splitLetters(word));
   const [wrongCount, setWrongCount] = React.useState(0);
   const newGameButtonRef = React.useRef(null);
 
   const gameWon = wordLetters.every(letter => letter.isHeld);
-  const gameLost = wrongCount === 8 ? true : false;
+  const gameLost = wrongCount >= 8 ? true : false;
 
 
 
@@ -82,7 +82,7 @@ export default function App() {
     }
     if(!(gameLost||gameWon))window.addEventListener("keydown", handle);
     return () => window.removeEventListener("keydown", handle);
-  },)
+  },[hold, gameLost ,gameWon])
 
 
 
@@ -100,12 +100,13 @@ export default function App() {
 
 
   function handleNewGame() {
-    setKeyboardButtons(() => generateLetters());
-    setWordLetters(() => splitLetters());
-    setWord(() => chooseRandom());
-    setWrongCount(0);
-
+    const newWord = chooseRandom(); // Choose a new word first
+    setWord(newWord); // Set the new word
+    setKeyboardButtons(() => generateLetters(newWord)); // Pass the new word to generate letters
+    setWordLetters(() => splitLetters(newWord)); // Update word letters
+    setWrongCount(0); // Reset the wrong count
   }
+  
   if (gameWon && newGameButtonRef !== null) { newGameButtonRef.current.focus(); }
   const pic = pics[wrongCount];
 
