@@ -53,7 +53,7 @@ export default function App() {
       isWanted={letter.isWanted}
       id={letter.id}
       hold={hold}
-      match={gameWon || gameLost}
+      match={!gameWon || !gameLost}
     />
   )
 
