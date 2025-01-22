@@ -15,7 +15,7 @@ export default function Keyboard(props) {
 
 
     const handleClick = () => {
-        
+        console.log(props.match)
         if (props.match) props.hold(props.id)
     }
 

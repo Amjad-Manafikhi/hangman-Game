@@ -53,7 +53,7 @@ export default function App() {
       isWanted={letter.isWanted}
       id={letter.id}
       hold={hold}
-      match={!gameWon || !gameLost}
+      match={!gameWon && !gameLost}
     />
   )
 
@@ -103,6 +103,7 @@ export default function App() {
     setKeyboardButtons(() => generateLetters());
     setWordLetters(() => splitLetters());
     setWord(() => chooseRandom());
+    setWrongCount(0);
 
   }
   if (gameWon && newGameButtonRef !== null) { newGameButtonRef.current.focus(); }
