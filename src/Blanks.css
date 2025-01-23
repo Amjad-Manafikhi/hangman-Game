@@ -14,4 +14,11 @@
     font-weight: 700;
     color:rgb(230,230,230);
 }
+@media (max-width:700px) {
+    .blanks{
+        width:30px;
+        height:30px;
+    }
+}
+
 

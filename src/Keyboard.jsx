@@ -22,6 +22,7 @@ export default function Keyboard(props) {
     const style = {
         backgroundColor: buttonColor
     }
+    
     return (
         <button style={style} onClick={() => handleClick()}>{upperValue}</button>
 
