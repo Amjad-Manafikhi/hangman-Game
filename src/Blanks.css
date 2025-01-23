@@ -20,5 +20,11 @@
         height:30px;
     }
 }
+@media (max-width:450px) {
+    .blanks{
+        width:25px;
+        height:25px;
+    }
+}
 
 
