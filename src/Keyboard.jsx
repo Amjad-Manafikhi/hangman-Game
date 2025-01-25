@@ -24,7 +24,7 @@ export default function Keyboard(props) {
     }
     
     return (
-        <button style={style} onClick={() => handleClick()}>{upperValue}</button>
+        <button disabled={!props.match}style={style} onClick={() => handleClick()}>{upperValue}</button>
 
     )
 }   

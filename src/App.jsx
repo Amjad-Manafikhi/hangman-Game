@@ -61,7 +61,7 @@ export default function App() {
   function hold(id) {
     setKeyboardButtons(oldState =>
       oldState.map((button) => {
-        if (button.id === id && !button.isHeld && !(word.word).includes(id)) { setWrongCount((prev) => prev + 1); }
+        if ( button.id === id && !button.isHeld && !(word.word).includes(id)) { setWrongCount((prev) => prev + 1); }
 
         return button.id === id ? { ...button, isHeld: true } : button
       }
@@ -145,7 +145,7 @@ export default function App() {
         </div>
       </div>
       <button className='new-game-button' onClick={handleNewGame} ref={newGameButtonRef}>New Game</button>
-      {gameWon && <Confetti />}
+      {gameWon && <Confetti recycle={false} nunmberOfPieces={10} />}
     </div>
   )
 }
